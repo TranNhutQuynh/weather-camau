@@ -1,0 +1,234 @@
+/* WeatherTrends.module.css */
+.trendsPage {
+    padding: 2rem;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #e0e7ff;
+  }
+  
+  .pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(30, 25, 80, 0.4);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .headerContent h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    background: linear-gradient(90deg, #8a2be2, #00d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+  }
+  
+  .pageSubtitle {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    color: #b0c4ff;
+  }
+  
+  .headerIcon {
+    color: #8a2be2;
+    filter: drop-shadow(0 0 20px #8a2be2);
+  }
+  
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .statCard {
+    padding: 1.8rem;
+    border-radius: 16px;
+    background: rgba(40, 35, 100, 0.3);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  
+  .statCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3);
+    border-color: #8a2be2;
+  }
+  
+  .statIcon {
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 16px;
+    color: #8a2be2;
+  }
+  
+  .statLabel {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .statValue {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #00d4ff;
+  }
+  
+  .chartSection {
+    padding: 2.5rem;
+    border-radius: 20px;
+    margin-bottom: 2.5rem;
+    background: rgba(20, 15, 60, 0.4);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    backdrop-filter: blur(12px);
+  }
+  
+  .sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.8rem;
+    margin: 0 0 2rem 0;
+    color: #8a2be2;
+  }
+  
+  .titleIcon {
+    color: #00d4ff;
+  }
+  
+  .barChart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 300px;
+    gap: 8px;
+    padding: 1rem 0;
+  }
+  
+  .barItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .bar {
+    width: 100%;
+    background: linear-gradient(to top, #00d4ff, #8a2be2);
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    transition: all 0.5s ease;
+    min-height: 20px;
+  }
+  
+  .bar:hover {
+    transform: scaleY(1.05);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  }
+  
+  .barLabel {
+    position: absolute;
+    top: -30px;
+    font-weight: bold;
+    color: #00ffbb;
+    text-shadow: 0 0 10px #00ffbb;
+  }
+  
+  .monthLabel {
+    font-size: 0.9rem;
+    color: #b0c4ff;
+  }
+  
+  .tempChart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 280px;
+    gap: 8px;
+    padding: 1rem 0;
+  }
+  
+  .tempItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  .tempBar {
+    width: 60%;
+    height: 180px;
+    background: linear-gradient(to top, #06ffa5 0%, #ff9f1c 70%, #ef476f 100%);
+    border-radius: 12px;
+    position: relative;
+  }
+  
+  .tempValue {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #00ffbb;
+    text-shadow: 0 0 10px #00ffbb;
+  }
+  
+  .infoBanner {
+    padding: 2rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 212, 255, 0.2));
+    border: 1px solid rgba(138, 43, 226, 0.5);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .bannerIcon {
+    color: #8a2be2;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+  
+  .bannerContent h3 {
+    margin: 0 0 1rem 0;
+    color: #8a2be2;
+    font-size: 1.5rem;
+  }
+  
+  .bannerContent ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    line-height: 1.8;
+  }
+  
+  .bannerContent li {
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .pageHeader {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .statsGrid {
+      grid-template-columns: 1fr;
+    }
+    .barChart, .tempChart {
+      height: 240px;
+    }
+  }

@@ -1,0 +1,230 @@
+/* WeatherMapPage.module.css */
+.mapPage {
+  padding: 0.5rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e8f4f8;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(30, 25, 80, 0.4);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.headerContent h1 {
+  font-size: 2rem;
+  margin: 0;
+  background: linear-gradient(90deg, #8a2be2, #00d4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pageSubtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+  color: #b0c4ff;
+}
+
+.headerIcon {
+  width: 50px;
+  height: 50px;
+  color: #8a2be2;
+  filter: drop-shadow(0 0 15px #8a2be2);
+}
+
+.mapContainer {
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.mapContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.guideCard {
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(40, 35, 100, 0.3);
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  backdrop-filter: blur(10px);
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guideCard h3 {
+  margin: 0 0 1rem 0;
+  color: #8a2be2;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.guideCard ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.guideCard li {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.guideCard li::marker {
+  color: #00d4ff;
+}
+
+.quickLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.quickLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(138, 43, 226, 0.2);
+  border: 1px solid rgba(138, 43, 226, 0.5);
+  border-radius: 50px;
+  color: #e8f4f8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+
+.quickLink:hover {
+  background: rgba(138, 43, 226, 0.4);
+  border-color: #8a2be2;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+  color: #00ffbb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mapPage {
+    padding: 0.25rem;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .headerContent h1 {
+    font-size: 1.75rem;
+  }
+  
+  .mapContainer {
+    height: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .quickLinks {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .quickLink {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
+  
+  .guideCard {
+    padding: 1rem;
+  }
+  
+  .guideCard h3 {
+    font-size: 1.1rem;
+  }
+  
+  .guideCard ul {
+    padding-left: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mapPage {
+    padding: 0.125rem;
+  }
+  
+  .pageHeader {
+    padding: 0.75rem;
+  }
+  
+  .headerContent h1 {
+    font-size: 1.5rem;
+  }
+  
+  .mapContainer {
+    height: 300px;
+    border-radius: 12px;
+  }
+  
+  .quickLinks {
+    grid-template-columns: 1fr;
+  }
+  
+  .quickLink {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .guideCard {
+    padding: 0.75rem;
+  }
+  
+  .guideCard h3 {
+    font-size: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .guideCard ul {
+    font-size: 0.85rem;
+    padding-left: 1rem;
+  }
+}
