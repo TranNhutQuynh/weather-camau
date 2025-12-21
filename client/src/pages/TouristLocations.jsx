@@ -550,12 +550,12 @@ export default function TouristLocations() {
                   </div>
                 </div>
               </div>
-              <p className={styles.modalDescription}>
-                {selectedLocation.location.description}
-              </p>
             </div>
+            <p className={styles.modalDescription}>
+              {selectedLocation.location.description}
+            </p>
 
-            {/* Current Weather */}
+            {/* Thời tiết hiện tại - Current Weather */}
             {weatherData[selectedLocation.location.id] && (
               <div className={styles.modalWeatherSection}>
                 <h3 className={styles.sectionTitleTourist}>
@@ -648,7 +648,7 @@ export default function TouristLocations() {
                   </div>
                 </div>
 
-                {/* Hourly Forecast */}
+                {/* Dự báo theo giờ - Hourly Forecast */}
                 <div className={styles.hourlyForecastModal}>
                   <h4 className={styles.forecastTitle}>
                     <Clock className={styles.forecastIcon} />
@@ -677,7 +677,7 @@ export default function TouristLocations() {
               </div>
             )}
 
-            {/* Attractions */}
+            {/* Điểm tham quan - Attractions */}
             {selectedLocation.location.attractions && (
               <div className={styles.modalAttractions}>
                 <h3 className={styles.sectionTitleTourist}>

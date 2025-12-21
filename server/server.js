@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-console.log("API KEY:", process.env.API_KEY);
 
 const weatherRoutes = require("./routes/weatherRoutes");
 
 const app = express();
+
+// Render BẮT BUỘC phải lấy đúng PORT này
 const PORT = process.env.PORT || 5000;
 
 // Middleware
@@ -16,12 +17,12 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/api/weather", weatherRoutes);
 
-// Kiểm tra hệ thống có hoạt động tốt không? (Health check)
+// Health check (Render dùng để kiểm tra service có sống không)
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "Weather API Server is running" });
 });
 
-// Middleware xử lý lỗi (Error handling middleware)
+// Middleware xử lý lỗi
 app.use((error, req, res, next) => {
   console.error(error.stack);
   res.status(500).json({
@@ -30,12 +31,12 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Lỗi 404
+// 404
 app.use((req, res) => {
   res.status(404).json({ error: "Không tìm thấy đường dẫn!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server đang chạy trên cổng ${PORT}`);
-  console.log(`API sẵn sàng http://localhost:${PORT}/api`);
+// Quan trọng: log rõ ràng để Render biết server đã start
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server đang chạy trên cổng ${PORT}`);
 });

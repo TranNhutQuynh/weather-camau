@@ -55,7 +55,7 @@ export default function App() {
               <p>Dự báo thời tiết thông minh</p>
             </div>
           </div>
-          <button 
+          <button
             className="mobile-close"
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -75,7 +75,9 @@ export default function App() {
             return (
               <button
                 key={item.id}
-                className={`nav-item ${currentPage === item.id ? "active" : ""}`}
+                className={`nav-item ${
+                  currentPage === item.id ? "active" : ""
+                }`}
                 onClick={() => {
                   setCurrentPage(item.id);
                   setMobileMenuOpen(false);
@@ -95,30 +97,25 @@ export default function App() {
             <div className="mini-temp">32°C</div>
             <div className="mini-location">Cà Mau</div>
           </div>
-          <p className="copyright">© 2024 Cà Mau Weather</p>
+          <p className="copyright">© 2025 Cà Mau Weather</p>
         </div>
       </aside>
 
       {/* Main Content */}
       <main className="main-content">
-        <button 
+        <button
           className="mobile-menu-btn"
           onClick={() => setMobileMenuOpen(true)}
         >
           <Menu />
         </button>
 
-        <div className="page-transition">
-          {renderPage()}
-        </div>
+        <div className="page-transition">{renderPage()}</div>
       </main>
 
       {/* Backdrop for mobile */}
       {mobileMenuOpen && (
-        <div 
-          className="backdrop"
-          onClick={() => setMobileMenuOpen(false)}
-        />
+        <div className="backdrop" onClick={() => setMobileMenuOpen(false)} />
       )}
     </div>
   );

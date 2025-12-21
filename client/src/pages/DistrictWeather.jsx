@@ -1,3 +1,4 @@
+// Module thời tiết khu vực
 import React, { useState, useEffect } from "react";
 import {
   MapPin,

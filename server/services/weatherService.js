@@ -98,7 +98,7 @@ const TOURIST_LOCATIONS = {
     region: "Bạc Liêu (cũ)",
     description: "Thủ phủ miền Tây, quê hương công tử Bạc Liêu nổi tiếng",
     attractions: [
-      "Nhà thờ Bạc Liêu",
+      "Nhà thờ Bạc Liêu ",
       "Nhà công tử Bạc Liêu",
       "Chợ Bạc Liêu",
       "Bảo tàng Bạc Liêu",
@@ -125,7 +125,7 @@ const TOURIST_LOCATIONS = {
     name: "Mẹ Nam Hải (Quan Âm Phật Đài)",
     lat: 9.28,
     lon: 105.735,
-    region: "Bạc Liêu",
+    region: "Bạc Liêu (cũ)",
     description:
       "Khu Quán Âm Phật Đài với tượng Mẹ Nam Hải linh thiêng nổi tiếng tại Bạc Liêu.",
     attractions: [
@@ -305,10 +305,10 @@ function formatWeatherData(current, forecast, airPollution) {
   return {
     current: {
       temp: Math.round(current.main.temp),
-      feelsLike: Math.round(current.main.feels_like), // Sửa từ fells_like
+      feelsLike: Math.round(current.main.feels_like),
       humidity: current.main.humidity,
       pressure: current.main.pressure,
-      windSpeed: Math.round(current.wind.speed * 3.6), // Sửa từ current.main.windSpeed
+      windSpeed: Math.round(current.wind.speed * 3.6),
       visibility: Math.round(current.visibility / 1000),
       condition: current.weather[0].description,
       icon: current.weather[0].icon,
@@ -335,7 +335,7 @@ function getDailyForecast(forecastList) {
   const dailyData = {};
 
   forecastList.forEach((item) => {
-    const date = new Date(item.dt * 1000).toLocaleDateString("vi-VN"); // Sửa từ toLocaleTimeString
+    const date = new Date(item.dt * 1000).toLocaleDateString("vi-VN");
     if (!dailyData[date]) {
       dailyData[date] = {
         temps: [],
@@ -345,7 +345,7 @@ function getDailyForecast(forecastList) {
       };
     }
     dailyData[date].temps.push(item.main.temp);
-    dailyData[date].conditions.push(item.weather[0]); // Sửa từ condition
+    dailyData[date].conditions.push(item.weather[0]);
     dailyData[date].rain.push(item.pop);
   });
 
@@ -358,7 +358,7 @@ function getDailyForecast(forecastList) {
       }),
       high: Math.round(Math.max(...data.temps)),
       low: Math.round(Math.min(...data.temps)),
-      condition: data.conditions[0].description, // Sửa từ condition
+      condition: data.conditions[0].description,
       icon: data.conditions[0].icon,
       rain: Math.round(Math.max(...data.rain) * 100),
     }));
@@ -383,25 +383,22 @@ async function getWeatherForTouristLocation(locationId) {
       ...location,
       id: locationId,
     },
-    weather: formatWeatherData(current, forecast, airPollution), // Sửa tên hàm
+    weather: formatWeatherData(current, forecast, airPollution),
   };
 }
 
 // Lấy thời tiết cho tất cả địa điểm
 async function getAllTouristWeather() {
-  const weatherPromises = Object.keys(TOURIST_LOCATIONS).map(
-    (
-      id // Sửa từ weatherPromise
-    ) =>
-      getWeatherForTouristLocation(id).catch((err) => ({
-        locationId: id,
-        error: err.message,
-      }))
+  const weatherPromises = Object.keys(TOURIST_LOCATIONS).map((id) =>
+    getWeatherForTouristLocation(id).catch((err) => ({
+      locationId: id,
+      error: err.message,
+    }))
   );
-  return Promise.all(weatherPromises); // Thêm dấu chấm phẩy
+  return Promise.all(weatherPromises);
 }
 
-// Tìm kiếm địa điểm - ĐÃ SỬA ĐỂ TÌM ĐƯỢC CÁC HUYỆN
+// Tìm kiếm địa điểm
 async function searchLocation(query) {
   try {
     // Tìm kiếm với nhiều biến thể khác nhau để tăng độ chính xác
@@ -490,8 +487,8 @@ module.exports = {
   getCurrentWeather,
   getForecast,
   getAirPollution,
-  formatWeatherData, // Sửa tên export
-  getWeatherForTouristLocation, // Sửa tên export
+  formatWeatherData,
+  getWeatherForTouristLocation,
   getAllTouristWeather,
   searchLocation,
   TOURIST_LOCATIONS,
