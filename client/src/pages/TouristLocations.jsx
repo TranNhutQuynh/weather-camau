@@ -32,7 +32,11 @@ export default function TouristLocations() {
   const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'compact'
   const [sortBy, setSortBy] = useState("default"); // 'default', 'rating', 'name'
 
-  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const API_BASE =
+    import.meta.env.VITE_API_URL ||
+    (import.meta.env.MODE === "production"
+      ? "https://weather-api-camau.vercel.app/api"
+      : "http://localhost:5000/api");
 
   useEffect(() => {
     fetchTouristWeather();

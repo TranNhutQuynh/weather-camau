@@ -16,7 +16,7 @@ import {
   Cloud,
   Loader,
   ExternalLink,
-  Info
+  Info,
 } from "lucide-react";
 import styles from "../styles/DistrictWeather.module.css";
 
@@ -27,29 +27,129 @@ export default function DistrictWeather({ selectedLocation }) {
   const [loading, setLoading] = useState(true);
   const [detailLoading, setDetailLoading] = useState(false);
 
-  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const API_BASE =
+    import.meta.env.VITE_API_URL ||
+    (import.meta.env.MODE === "production"
+      ? "https://weather-api-camau.vercel.app/api"
+      : "http://localhost:5000/api");
 
   // Danh sách các huyện/thành phố của Cà Mau (bao gồm Bạc Liêu cũ)
   const DISTRICTS = [
     // Tỉnh Cà Mau cũ
-    { id: "ca-mau-city", name: "Thành phố Cà Mau", region: "Cà Mau", lat: 9.1526, lon: 105.196 },
-    { id: "u-minh", name: "Huyện U Minh", region: "Cà Mau", lat: 9.0167, lon: 105.0333 },
-    { id: "thoi-binh", name: "Huyện Thới Bình", region: "Cà Mau", lat: 9.2333, lon: 105.15 },
-    { id: "tran-van-thoi", name: "Huyện Trần Văn Thời", region: "Cà Mau", lat: 9.0, lon: 104.95 },
-    { id: "cai-nuoc", name: "Huyện Cái Nước", region: "Cà Mau", lat: 9.0167, lon: 105.0833 },
-    { id: "dam-doi", name: "Huyện Đầm Dơi", region: "Cà Mau", lat: 9.1, lon: 105.15 },
-    { id: "nam-can", name: "Huyện Nam Căn", region: "Cà Mau", lat: 8.75, lon: 105.0833 },
-    { id: "phu-tan", name: "Huyện Phú Tân", region: "Cà Mau", lat: 9.1333, lon: 105.2667 },
-    { id: "ngoc-hien", name: "Huyện Ngọc Hiển", region: "Cà Mau", lat: 8.6667, lon: 104.9333 },
-    
+    {
+      id: "ca-mau-city",
+      name: "Thành phố Cà Mau",
+      region: "Cà Mau",
+      lat: 9.1526,
+      lon: 105.196,
+    },
+    {
+      id: "u-minh",
+      name: "Huyện U Minh",
+      region: "Cà Mau",
+      lat: 9.0167,
+      lon: 105.0333,
+    },
+    {
+      id: "thoi-binh",
+      name: "Huyện Thới Bình",
+      region: "Cà Mau",
+      lat: 9.2333,
+      lon: 105.15,
+    },
+    {
+      id: "tran-van-thoi",
+      name: "Huyện Trần Văn Thời",
+      region: "Cà Mau",
+      lat: 9.0,
+      lon: 104.95,
+    },
+    {
+      id: "cai-nuoc",
+      name: "Huyện Cái Nước",
+      region: "Cà Mau",
+      lat: 9.0167,
+      lon: 105.0833,
+    },
+    {
+      id: "dam-doi",
+      name: "Huyện Đầm Dơi",
+      region: "Cà Mau",
+      lat: 9.1,
+      lon: 105.15,
+    },
+    {
+      id: "nam-can",
+      name: "Huyện Nam Căn",
+      region: "Cà Mau",
+      lat: 8.75,
+      lon: 105.0833,
+    },
+    {
+      id: "phu-tan",
+      name: "Huyện Phú Tân",
+      region: "Cà Mau",
+      lat: 9.1333,
+      lon: 105.2667,
+    },
+    {
+      id: "ngoc-hien",
+      name: "Huyện Ngọc Hiển",
+      region: "Cà Mau",
+      lat: 8.6667,
+      lon: 104.9333,
+    },
+
     // Tỉnh Bạc Liêu cũ (nay sáp nhập)
-    { id: "bac-lieu-city", name: "Thành phố Bạc Liêu", region: "Bạc Liêu (cũ)", lat: 9.294, lon: 105.7215 },
-    { id: "hong-dan", name: "Huyện Hồng Dân", region: "Bạc Liêu (cũ)", lat: 9.4833, lon: 105.4167 },
-    { id: "phuoc-long", name: "Huyện Phước Long", region: "Bạc Liêu (cũ)", lat: 9.3667, lon: 105.6333 },
-    { id: "vinh-loi", name: "Huyện Vĩnh Lợi", region: "Bạc Liêu (cũ)", lat: 9.2833, lon: 105.55 },
-    { id: "gia-rai", name: "Huyện Giá Rai", region: "Bạc Liêu (cũ)", lat: 9.3167, lon: 105.6667 },
-    { id: "dong-hai", name: "Huyện Đông Hải", region: "Bạc Liêu (cũ)", lat: 9.1667, lon: 105.5833 },
-    { id: "hoa-binh", name: "Huyện Hòa Bình", region: "Bạc Liêu (cũ)", lat: 9.3833, lon: 105.7833 },
+    {
+      id: "bac-lieu-city",
+      name: "Thành phố Bạc Liêu",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.294,
+      lon: 105.7215,
+    },
+    {
+      id: "hong-dan",
+      name: "Huyện Hồng Dân",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.4833,
+      lon: 105.4167,
+    },
+    {
+      id: "phuoc-long",
+      name: "Huyện Phước Long",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.3667,
+      lon: 105.6333,
+    },
+    {
+      id: "vinh-loi",
+      name: "Huyện Vĩnh Lợi",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.2833,
+      lon: 105.55,
+    },
+    {
+      id: "gia-rai",
+      name: "Huyện Giá Rai",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.3167,
+      lon: 105.6667,
+    },
+    {
+      id: "dong-hai",
+      name: "Huyện Đông Hải",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.1667,
+      lon: 105.5833,
+    },
+    {
+      id: "hoa-binh",
+      name: "Huyện Hòa Bình",
+      region: "Bạc Liêu (cũ)",
+      lat: 9.3833,
+      lon: 105.7833,
+    },
   ];
 
   useEffect(() => {
@@ -67,26 +167,26 @@ export default function DistrictWeather({ selectedLocation }) {
   const handleLocationFromSearch = async (locationData) => {
     try {
       setDetailLoading(true);
-      
+
       // Tạo district object từ search data
       const district = {
         id: `search-${Date.now()}`,
         name: locationData.location.displayName || locationData.location.name,
         region: "Kết quả tìm kiếm",
         lat: locationData.location.lat,
-        lon: locationData.location.lon
+        lon: locationData.location.lon,
       };
 
       setSelectedDistrict(district);
 
       // Nếu đã có weather data từ search, dùng luôn
       if (locationData.weather) {
-        setWeatherData(prev => ({
+        setWeatherData((prev) => ({
           ...prev,
           [district.id]: {
             current: locationData.weather,
-            forecast: locationData.forecast
-          }
+            forecast: locationData.forecast,
+          },
         }));
       } else {
         // Nếu không có, fetch mới
@@ -103,7 +203,7 @@ export default function DistrictWeather({ selectedLocation }) {
   const fetchAllDistrictsWeather = async () => {
     try {
       setLoading(true);
-      
+
       const promises = DISTRICTS.map(async (district) => {
         try {
           const response = await fetch(
@@ -118,9 +218,9 @@ export default function DistrictWeather({ selectedLocation }) {
       });
 
       const results = await Promise.all(promises);
-      
+
       const weatherMap = {};
-      results.forEach(result => {
+      results.forEach((result) => {
         if (result.data) {
           weatherMap[result.id] = { current: result.data };
         }
@@ -140,15 +240,15 @@ export default function DistrictWeather({ selectedLocation }) {
 
       const [currentRes, forecastRes] = await Promise.all([
         fetch(`${API_BASE}/weather/current/${district.lat}/${district.lon}`),
-        fetch(`${API_BASE}/weather/forecast/${district.lat}/${district.lon}`)
+        fetch(`${API_BASE}/weather/forecast/${district.lat}/${district.lon}`),
       ]);
 
       const current = await currentRes.json();
       const forecast = await forecastRes.json();
 
-      setWeatherData(prev => ({
+      setWeatherData((prev) => ({
         ...prev,
-        [district.id]: { current, forecast }
+        [district.id]: { current, forecast },
       }));
 
       setDetailLoading(false);
@@ -160,14 +260,16 @@ export default function DistrictWeather({ selectedLocation }) {
 
   const handleDistrictClick = async (district) => {
     setSelectedDistrict(district);
-    
+
     if (!weatherData[district.id]?.forecast) {
       await fetchDistrictDetail(district);
     }
   };
 
   const openGoogleMaps = (lat, lon, name) => {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&destination_place_id=${encodeURIComponent(name)}`;
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&destination_place_id=${encodeURIComponent(
+      name
+    )}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -180,7 +282,12 @@ export default function DistrictWeather({ selectedLocation }) {
     if (!iconCode) return Sun;
     if (iconCode.includes("01")) return Sun;
     if (iconCode.includes("02") || iconCode.includes("03")) return Cloud;
-    if (iconCode.includes("09") || iconCode.includes("10") || iconCode.includes("11")) return CloudRain;
+    if (
+      iconCode.includes("09") ||
+      iconCode.includes("10") ||
+      iconCode.includes("11")
+    )
+      return CloudRain;
     if (iconCode.includes("50")) return Wind;
     return Sun;
   };
@@ -228,9 +335,10 @@ export default function DistrictWeather({ selectedLocation }) {
         <div className={styles.infoContent}>
           <h3>Về tỉnh Cà Mau mới</h3>
           <p>
-            Sau khi sáp nhập với tỉnh Bạc Liêu, Cà Mau trở thành tỉnh lớn nhất 
-            vùng Đồng bằng sông Cửu Long với {DISTRICTS.length} đơn vị hành chính cấp huyện.
-            Click vào từng huyện để xem thông tin chi tiết và nhận chỉ đường.
+            Sau khi sáp nhập với tỉnh Bạc Liêu, Cà Mau trở thành tỉnh lớn nhất
+            vùng Đồng bằng sông Cửu Long với {DISTRICTS.length} đơn vị hành
+            chính cấp huyện. Click vào từng huyện để xem thông tin chi tiết và
+            nhận chỉ đường.
           </p>
         </div>
       </div>
@@ -239,7 +347,9 @@ export default function DistrictWeather({ selectedLocation }) {
       <div className={styles.districtsGrid}>
         {districts.map((district) => {
           const weather = weatherData[district.id]?.current;
-          const WeatherIcon = weather ? getWeatherIcon(weather.weather?.[0]?.icon) : Sun;
+          const WeatherIcon = weather
+            ? getWeatherIcon(weather.weather?.[0]?.icon)
+            : Sun;
           const temp = weather ? Math.round(weather.main.temp) : "--";
 
           return (
@@ -251,7 +361,9 @@ export default function DistrictWeather({ selectedLocation }) {
               <div className={styles.districtHeader}>
                 <div className={styles.districtInfo}>
                   <h3 className={styles.districtName}>{district.name}</h3>
-                  <span className={styles.districtRegion}>{district.region}</span>
+                  <span className={styles.districtRegion}>
+                    {district.region}
+                  </span>
                 </div>
                 <button
                   className={styles.mapBtn}
@@ -268,12 +380,12 @@ export default function DistrictWeather({ selectedLocation }) {
               {weather ? (
                 <div className={styles.districtWeather}>
                   <div className={styles.weatherMain}>
-                    <WeatherIcon 
-                      className={styles.weatherIcon} 
+                    <WeatherIcon
+                      className={styles.weatherIcon}
                       style={{ color: getTemperatureColor(temp) }}
                     />
                     <div className={styles.tempDisplay}>
-                      <span 
+                      <span
                         className={styles.tempValue}
                         style={{ color: getTemperatureColor(temp) }}
                       >
@@ -294,7 +406,9 @@ export default function DistrictWeather({ selectedLocation }) {
                     </div>
                   </div>
 
-                  <p className={styles.weatherCondition}>{weather.weather[0].description}</p>
+                  <p className={styles.weatherCondition}>
+                    {weather.weather[0].description}
+                  </p>
                 </div>
               ) : (
                 <div className={styles.noData}>
@@ -319,9 +433,18 @@ export default function DistrictWeather({ selectedLocation }) {
 
       {/* Detail Modal */}
       {selectedDistrict && (
-        <div className={styles.modalOverlay} onClick={() => setSelectedDistrict(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setSelectedDistrict(null)}>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setSelectedDistrict(null)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={styles.modalClose}
+              onClick={() => setSelectedDistrict(null)}
+            >
               ×
             </button>
 
@@ -335,31 +458,49 @@ export default function DistrictWeather({ selectedLocation }) {
                 {/* Modal Header */}
                 <div className={styles.modalHeader}>
                   <div className={styles.modalTitleSection}>
-                    <h2 className={styles.modalTitle}>{selectedDistrict.name}</h2>
-                    <span className={styles.modalRegion}>{selectedDistrict.region}</span>
+                    <h2 className={styles.modalTitle}>
+                      {selectedDistrict.name}
+                    </h2>
+                    <span className={styles.modalRegion}>
+                      {selectedDistrict.region}
+                    </span>
                   </div>
                   <div className={styles.modalCoords}>
                     <MapPin className={styles.coordsIcon} />
-                    <span>{selectedDistrict.lat.toFixed(4)}, {selectedDistrict.lon.toFixed(4)}</span>
+                    <span>
+                      {selectedDistrict.lat.toFixed(4)},{" "}
+                      {selectedDistrict.lon.toFixed(4)}
+                    </span>
                   </div>
                 </div>
 
                 {/* Current Weather Detail */}
                 {weatherData[selectedDistrict.id]?.current && (
                   <div className={styles.modalCurrent}>
-                    <h3 className={styles.sectionTitleModal}>Thời tiết hiện tại</h3>
-                    
+                    <h3 className={styles.sectionTitleModal}>
+                      Thời tiết hiện tại
+                    </h3>
+
                     <div className={styles.currentDisplayLarge}>
                       {React.createElement(
-                        getWeatherIcon(weatherData[selectedDistrict.id].current.weather[0].icon),
+                        getWeatherIcon(
+                          weatherData[selectedDistrict.id].current.weather[0]
+                            .icon
+                        ),
                         { className: styles.currentIconLarge }
                       )}
                       <div className={styles.currentTempLarge}>
                         <span className={styles.tempLarge}>
-                          {Math.round(weatherData[selectedDistrict.id].current.main.temp)}°
+                          {Math.round(
+                            weatherData[selectedDistrict.id].current.main.temp
+                          )}
+                          °
                         </span>
                         <span className={styles.conditionLarge}>
-                          {weatherData[selectedDistrict.id].current.weather[0].description}
+                          {
+                            weatherData[selectedDistrict.id].current.weather[0]
+                              .description
+                          }
                         </span>
                       </div>
                     </div>
@@ -370,7 +511,11 @@ export default function DistrictWeather({ selectedLocation }) {
                         <div>
                           <p className={styles.detailLabel}>Cảm giác như</p>
                           <p className={styles.detailValue}>
-                            {Math.round(weatherData[selectedDistrict.id].current.main.feels_like)}°C
+                            {Math.round(
+                              weatherData[selectedDistrict.id].current.main
+                                .feels_like
+                            )}
+                            °C
                           </p>
                         </div>
                       </div>
@@ -380,7 +525,11 @@ export default function DistrictWeather({ selectedLocation }) {
                         <div>
                           <p className={styles.detailLabel}>Độ ẩm</p>
                           <p className={styles.detailValue}>
-                            {weatherData[selectedDistrict.id].current.main.humidity}%
+                            {
+                              weatherData[selectedDistrict.id].current.main
+                                .humidity
+                            }
+                            %
                           </p>
                         </div>
                       </div>
@@ -390,7 +539,11 @@ export default function DistrictWeather({ selectedLocation }) {
                         <div>
                           <p className={styles.detailLabel}>Gió</p>
                           <p className={styles.detailValue}>
-                            {Math.round(weatherData[selectedDistrict.id].current.wind.speed * 3.6)} km/h
+                            {Math.round(
+                              weatherData[selectedDistrict.id].current.wind
+                                .speed * 3.6
+                            )}{" "}
+                            km/h
                           </p>
                         </div>
                       </div>
@@ -400,7 +553,11 @@ export default function DistrictWeather({ selectedLocation }) {
                         <div>
                           <p className={styles.detailLabel}>Tầm nhìn</p>
                           <p className={styles.detailValue}>
-                            {Math.round(weatherData[selectedDistrict.id].current.visibility / 1000)} km
+                            {Math.round(
+                              weatherData[selectedDistrict.id].current
+                                .visibility / 1000
+                            )}{" "}
+                            km
                           </p>
                         </div>
                       </div>
@@ -410,7 +567,11 @@ export default function DistrictWeather({ selectedLocation }) {
                         <div>
                           <p className={styles.detailLabel}>Áp suất</p>
                           <p className={styles.detailValue}>
-                            {weatherData[selectedDistrict.id].current.main.pressure} mb
+                            {
+                              weatherData[selectedDistrict.id].current.main
+                                .pressure
+                            }{" "}
+                            mb
                           </p>
                         </div>
                       </div>
@@ -420,7 +581,11 @@ export default function DistrictWeather({ selectedLocation }) {
                         <div>
                           <p className={styles.detailLabel}>Mây che phủ</p>
                           <p className={styles.detailValue}>
-                            {weatherData[selectedDistrict.id].current.clouds.all}%
+                            {
+                              weatherData[selectedDistrict.id].current.clouds
+                                .all
+                            }
+                            %
                           </p>
                         </div>
                       </div>
@@ -436,25 +601,32 @@ export default function DistrictWeather({ selectedLocation }) {
                       Dự báo 24 giờ tới
                     </h3>
                     <div className={styles.hourlyScrollModal}>
-                      {weatherData[selectedDistrict.id].forecast.list.slice(0, 8).map((hour, idx) => {
-                        const HourIcon = getWeatherIcon(hour.weather[0].icon);
-                        return (
-                          <div key={idx} className={styles.hourlyItemModal}>
-                            <p className={styles.hourlyTimeModal}>
-                              {new Date(hour.dt * 1000).toLocaleTimeString("vi-VN", {
-                                hour: "2-digit",
-                                minute: "2-digit"
-                              })}
-                            </p>
-                            <HourIcon className={styles.hourlyIconModal} />
-                            <p className={styles.hourlyTempModal}>{Math.round(hour.main.temp)}°</p>
-                            <div className={styles.hourlyRainModal}>
-                              <Droplets className={styles.rainIconMini} />
-                              <span>{Math.round(hour.pop * 100)}%</span>
+                      {weatherData[selectedDistrict.id].forecast.list
+                        .slice(0, 8)
+                        .map((hour, idx) => {
+                          const HourIcon = getWeatherIcon(hour.weather[0].icon);
+                          return (
+                            <div key={idx} className={styles.hourlyItemModal}>
+                              <p className={styles.hourlyTimeModal}>
+                                {new Date(hour.dt * 1000).toLocaleTimeString(
+                                  "vi-VN",
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  }
+                                )}
+                              </p>
+                              <HourIcon className={styles.hourlyIconModal} />
+                              <p className={styles.hourlyTempModal}>
+                                {Math.round(hour.main.temp)}°
+                              </p>
+                              <div className={styles.hourlyRainModal}>
+                                <Droplets className={styles.rainIconMini} />
+                                <span>{Math.round(hour.pop * 100)}%</span>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
                     </div>
                   </div>
                 )}
@@ -463,28 +635,34 @@ export default function DistrictWeather({ selectedLocation }) {
                 <div className={styles.modalActions}>
                   <button
                     className={`${styles.actionBtn} ${styles.primary}`}
-                    onClick={() => openGoogleMaps(
-                      selectedDistrict.lat,
-                      selectedDistrict.lon,
-                      selectedDistrict.name
-                    )}
+                    onClick={() =>
+                      openGoogleMaps(
+                        selectedDistrict.lat,
+                        selectedDistrict.lon,
+                        selectedDistrict.name
+                      )
+                    }
                   >
                     <Navigation />
                     Chỉ đường đến đây
                   </button>
                   <button
                     className={`${styles.actionBtn} ${styles.secondary}`}
-                    onClick={() => viewOnMap(selectedDistrict.lat, selectedDistrict.lon)}
+                    onClick={() =>
+                      viewOnMap(selectedDistrict.lat, selectedDistrict.lon)
+                    }
                   >
                     <MapPin />
                     Xem trên bản đồ
                   </button>
                   <button
                     className={`${styles.actionBtn} ${styles.secondary}`}
-                    onClick={() => window.open(
-                      `https://www.google.com/search?q=thời+tiết+${selectedDistrict.name}`,
-                      "_blank"
-                    )}
+                    onClick={() =>
+                      window.open(
+                        `https://www.google.com/search?q=thời+tiết+${selectedDistrict.name}`,
+                        "_blank"
+                      )
+                    }
                   >
                     <ExternalLink />
                     Tìm kiếm Google
